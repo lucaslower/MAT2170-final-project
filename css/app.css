@@ -1,0 +1,136 @@
+body{
+    background:#eaeaea;
+    color:#353535;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+}
+section.page{
+    max-width:1024px;
+    width:90%;
+    margin:80px auto 60px auto;
+}
+
+/* Header */
+header.title{
+    font-size:2.4em;
+    font-weight:500;
+    position:relative;
+    margin-bottom:40px;
+}
+header.title:after{
+    content:'';
+    display:block;
+    width:100%;
+    height:2px;
+    background:#353535;
+    position:absolute;
+    top:50%;
+    left:0;
+    transform:translateY(-1px);
+    z-index:99;
+}
+header.title span{
+    background:#eaeaea;
+    z-index:999;
+    display:inline-block;
+    padding-right:30px;
+    position:relative;
+}
+
+/* About */
+section.about{
+    margin-bottom:40px;
+}
+section.about a,
+section.about a:visited{
+    color:#353535;
+}
+
+/* Form */
+section.options{
+
+}
+section.options label{
+    display:block;
+    font-size:1.2em;
+    margin:40px 0px 15px;
+}
+section.options select{
+    appearance:none;
+    -webkit-appearance:none;
+    width:100%;
+    display:block;
+    padding:16px;
+    border:1px solid #353535;
+    color:#353535;
+    background:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    z-index:999;
+    font-size:0.8em;
+    border-radius:0px;
+}
+section.options div.select_wrap{
+    position:relative;
+    z-index:999;
+}
+section.options div.select_wrap img{
+    width:20px;
+    height:auto;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    right:20px;
+    z-index:999999;
+}
+section.options select:focus{
+    outline:none;
+}
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 100%;
+    background:#eaeaea;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+    background:#eaeaea;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+    cursor:pointer;
+}
+section.options div.color_wrap{
+    margin-bottom:15px;
+    display:flex;
+}
+section.options div.color_wrap span{
+    display:inline-block;
+    padding-right:20px;
+}
+section.options .sub_btn{
+    appearance:none;
+    -webkit-appearance:none;
+    padding:16px;
+    background:#fff;
+    border:1px solid #353535;
+    margin-top:30px;
+    cursor:pointer;
+    font-size:0.8em;
+    width:100%;
+    text-align:center;
+}
+section.options .sub_btn:hover{
+    background:transparent;
+}
+
+/* Footer */
+section.footer{
+    text-align:center;
+    font-size:0.7em;
+    color:#5d5d5d;
+    margin-top:40px;
+}
+section.footer a,
+section.footer a:visited{
+    color:#5d5d5d;
+}

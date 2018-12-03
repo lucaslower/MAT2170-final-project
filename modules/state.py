@@ -4,38 +4,37 @@ Holds seed pixel for PIL flood_fill(), state name, data point, and fill color.
 """
 class State:
 
-    def __init__(self, state_abbrev = 'EX', state_full = 'Example', state_data = 100, state_pixel = (0,0), state_fill = (255,255,255)):
+    def __init__(self, state_abbrev = 'EX', state_data = 100, state_pixel = (0,0), state_fill = (255,255,255)):
         """
         init func
         :param state_abbrev: The abbreviation of the state (2 letter)
-        :param state_full: The full name of the state
         :param state_data: The data point attached to the state
         :param state_pixel: The seed pixel of the state (as a two-value tuple containing x,y coordinates on the U.S. map image)
         :param state_fill: The computed fill color for the state (as a 3-value tuple containing r,g,b values)
         """
         self.state_abbrev = state_abbrev
-        self.state_full = state_full
         self.state_data = state_data
         self.state_pixel = state_pixel
         self.state_fill = state_fill
 
+    def __str__(self):
+        return 'State: '+self.state_abbrev+'. Seed: ('+str(self.state_pixel[0])+','+str(self.state_pixel[1])+').'
+
     # GET AND SET NAME
     def get_name(self):
         """
-        gets abbreviation and full name attributes
-        :return: 2-val tuple containing abbrev,full
+        gets abbreviation
+        :return: state abbreviation
         """
-        return (self.state_abbrev, self.state_full)
+        return self.state_abbrev
 
-    def set_name(self, abbrev, full):
+    def set_name(self, abbrev):
         """
-        sets the abbreviation and full name attributes
+        sets the abbreviation attribute
         :param abbrev: see state_abbrev @ __init__
-        :param full: see state_full @ __init__
         :return: None
         """
         self.state_abbrev = abbrev
-        self.state_full = full
         return None
 
     # GET AND SET SEED PIXEL
@@ -79,13 +78,11 @@ class State:
         """
         return self.state_fill
 
-    def set_fill(self, r, g, b):
+    def set_fill(self, rgb_tup):
         """
         sets the state's fill color tuple
-        :param r: red component
-        :param g: green component
-        :param b: blue component
+        :param rgb_tup: r,g,b color tuple
         :return: None
         """
-        self.state_fill = (r,g,b)
+        self.state_fill = rgb_tup
         return None
