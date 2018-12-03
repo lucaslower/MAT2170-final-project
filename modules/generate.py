@@ -79,7 +79,7 @@ def generate_map(file_num, start_color, end_color):
     title_fnt = ImageFont.truetype('/var/www/projects.lucaslower.com/us-map/fonts/anonpro.ttf', 65)
     draw = ImageDraw.Draw(im)
 
-    draw.text((1440, 56), file_attr[3], font=title_fnt, fill=(0, 0, 0))
+    draw.text((1860, 170), file_attr[3], font=title_fnt, fill=(0, 0, 0))
 
     for state in state_d:
         fill_color = cmap.compute_color(data[state])
