@@ -15,16 +15,20 @@ spec_color_map.loader.exec_module(color_map)
 from PIL import Image, ImageDraw, ImageFont
 
 
-# get file attributes given number
+# get file attributes from given number
 def get_file_attributes(file_num):
+    # file name map
     files = {1: 'legislators-current.csv', 2: 'starbucks.csv', 3: 'state-gsp-growth.csv', 4: 'state-water-area.csv'}
+    # file title map
     file_titles = {
         1: 'Number of legislators (senators/representatives) per state',
         2: 'Number of Starbucks stores per state',
         3: 'Percent growth in GSP (Gross State Product) per state',
         4: 'Percent area of each state that is water'
     }
+    # full path
     file_name = '/var/www/projects.lucaslower.com/us-map/data_files/' + files[file_num]
+    # data type, state column if needed
     if file_num == 1:
         file_type = 2
         state_col = 5
@@ -75,16 +79,21 @@ def generate_map(file_num, start_color, end_color):
     print(max(vals), min(vals))
     cmap = color_map.ColorMap(rgb_end, rgb_start, min(vals), max(vals))
 
+    # setup draw fonts
     fnt = ImageFont.truetype('/var/www/projects.lucaslower.com/us-map/fonts/anonpro.ttf', 55)
     title_fnt = ImageFont.truetype('/var/www/projects.lucaslower.com/us-map/fonts/anonpro.ttf', 65)
     draw = ImageDraw.Draw(im)
 
-    draw.text((1860, 170), file_attr[3], font=title_fnt, fill=(0, 0, 0))
+    # draw title text
+    title_offset = draw.textsize(file_attr[3], font=title_fnt)//2
+    draw.text((2301 - title_offset, 120), file_attr[3], font=title_fnt, fill=(0, 0, 0))
 
     for state in state_d:
+        # get state data
         fill_color = cmap.compute_color(data[state])
         state_pixel = state_d[state].get_pixel()
         text_pixel = (state_pixel[0] - 20, state_pixel[1] - 20)
+        # fill state with computed color
         ImageDraw.floodfill(im, state_pixel, fill_color, None, 30)
         # some states have 1 or more disconnected regions, let's handle that
         if state == 'MI':
@@ -93,6 +102,7 @@ def generate_map(file_num, start_color, end_color):
             ImageDraw.floodfill(im, (3916,1328), fill_color, None, 30)
         elif state == 'MD':
             ImageDraw.floodfill(im, (3616,1176), fill_color, None, 30)
+        # why does hawaii need so many islands
         elif state == 'HI':
             ImageDraw.floodfill(im, (1308,2384), fill_color, None, 30)
             ImageDraw.floodfill(im, (1452,2440), fill_color, None, 30)
@@ -100,6 +110,7 @@ def generate_map(file_num, start_color, end_color):
             ImageDraw.floodfill(im, (1608,2513), fill_color, None, 30)
             ImageDraw.floodfill(im, (1252,2399), fill_color, None, 30)
             ImageDraw.floodfill(im, (1553,2505), fill_color, None, 30)
+        # draw state label text
         draw.text(text_pixel, state, font=fnt, fill=(255 - fill_color[0], 255 - fill_color[1], 255 - fill_color[2]))
 
     # DRAW GRADIENT SCALE
@@ -116,7 +127,6 @@ def generate_map(file_num, start_color, end_color):
     for color in rgb_diff:
         if abs(color) > diff_max:
             diff_max = abs(color)
-            index_max = rgb_diff.index(color)
 
     # step size modifier
     step_mod = diff_max / height
@@ -144,6 +154,9 @@ def generate_map(file_num, start_color, end_color):
     draw.text((4310, 1340), str(max(vals)), font=fnt, fill=(0, 0, 0))
     draw.text((4310, 2485), str(min(vals)), font=fnt, fill=(0, 0, 0))
 
+    # image out
     im.save('/var/www/projects.lucaslower.com/us-map/generated/map.jpg')
 
+    # passback url (if we stored more than 1 generated map this would make more sense
+    # because we would store the path in DB and use the primary key as file name)
     return 'http://projects.lucaslower.com/us-map/generated/map.jpg'
