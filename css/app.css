@@ -123,6 +123,29 @@ section.options .sub_btn:hover{
     background:transparent;
 }
 
+/* Map Display */
+section.view_map img{
+    width:100%;
+    height:auto;
+    display:block;
+    margin-bottom:40px;
+    border:1px solid #353535;
+}
+section.view_map .sub_btn{
+    appearance:none;
+    -webkit-appearance:none;
+    padding:16px;
+    background:#fff;
+    border:1px solid #353535;
+    cursor:pointer;
+    font-size:0.8em;
+    width:100%;
+    text-align:center;
+}
+section.view_map .sub_btn:hover{
+    background:transparent;
+}
+
 /* Footer */
 section.footer{
     text-align:center;

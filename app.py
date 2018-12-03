@@ -29,14 +29,14 @@ class render_map:
     render_map class---handles map render
     """
     def GET(self):
-        # redirect to index on GET
+        # redirect to index
         raise web.redirect('/')
 
     # helper functions for map generation
     def POST(self):
         data = web.input()
         url = generate.generate_map(int(data['data_file']),str(data['start_color']),str(data['end_color']))
-        raise web.redirect(url)
+        return render.render(url)
 
 
 # run app

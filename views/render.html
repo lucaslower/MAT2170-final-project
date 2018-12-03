@@ -1,0 +1,32 @@
+$def with (path)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>US Map Data Visualization</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,500" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<section class="page">
+    <header class="title">
+        <span>U.S. Map Data Visualization</span>
+    </header>
+    <section class="view_map">
+        <img src="${path}">
+        <button onclick="relocate()" type="button" class="sub_btn">Have another go&nbsp;&nbsp;&rarr;</button>
+    </section>
+    <section class="footer">
+        Crafted with care by <a href="https://lucaslower.com">Lucas Lower</a> for CS 1 at <a href="https://www.eiu.edu">EIU</a>.
+    </section>
+</section>
+
+<script type="text/javascript">
+    function relocate(){
+        window.location.replace('http://projects.lucaslower.com/us-map/');
+    }
+</script>
+</body>
+</html>
